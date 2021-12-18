@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="AntiFraudUI.Views.CheckBinView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AntiFraudUI.Views"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" Background="White"
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:cal="http://www.caliburnproject.org">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!--Представление окна валидации BIN-->
+        <!--Строка 1-->
+        <TextBlock FontSize="15" Grid.Column="0" Grid.Row="1" Text="Введите BIN: "/>
+        <TextBox x:Name="Bin" Text="{Binding Bin, Mode=TwoWay}" FontSize="15" Grid.Column="1" Grid.Row="1" Width="142"/>
+        <Button FontSize="15" Grid.Column="2" Grid.Row="1" Margin="10 0 0 0" Content="Проверить BIN">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cal:ActionMessage MethodName="CheckBinButton">
+                        <cal:Parameter Value="{Binding ElementName=Bin, Path=Text}"/>
+                    </cal:ActionMessage>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+
+        <!--Строка 2-->
+        <TextBlock FontSize="15" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Text="{Binding WithdrawStatus, Mode=OneWay}"/>
+
+        <!--Строка 3-->
+        <TextBlock FontSize="15" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding DepositStatus, Mode=OneWay}"/>
+
+    </Grid>
+</UserControl>
